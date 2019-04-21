@@ -1,0 +1,64 @@
+#day-forecast {
+    position: relative;
+    color: #efefef;
+}
+.detail {
+    font-size: 12px;
+    font-weight: 600;
+    color: #d4d4d7;
+}
+#min-max {
+    position: absolute;
+    left: 40px;
+    top: 90px;
+    text-align: right;
+}
+#info {
+    position: absolute;
+    right: 25px;
+    top: 90px;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+
+    li {
+        list-style-type: none;
+    }
+    .icon { 
+        margin-right: 4px;
+    }
+    .unit {
+        font-size: 75%;
+    }
+}
+
+h1 {
+    position: absolute;
+    left: 60px;
+    text-align: center;
+    width: 200px;
+    top: 80px;
+    font-size: 46px;
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+
+    .icon {
+        padding: 0 10px 0 0;
+        top: 4px;
+        position: relative;
+    }
+}
+#weather { 
+    height: 150px;
+}
+#summary {
+    position: relative;
+
+    h2 {
+        font-size: 14px;
+        color: #efefef;
+        margin: 30px 30px 40px;
+        text-align: center;
+    }
+}

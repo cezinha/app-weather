@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Muli');
+$font-stack: 'Muli', sans-serif;
+
+body {
+  font-family: $font-stack;
+  font-weight: 400;
+  background-color: #000;
+  background-image: linear-gradient( #4b4d5e, #373846, #292937);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+}
+
+#main {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.container {
+  width: 320px; 
+  margin: 0 auto;
+  position: relative;
+}
+
+.centered-page {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  color: #d4d4d7;
+  display: table;
+
+  .center {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    margin: 0;
+  }
+}

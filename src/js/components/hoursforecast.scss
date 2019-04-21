@@ -1,0 +1,74 @@
+table#hours {
+  position: relative;
+  z-index: 10;
+}
+
+table, td, th {
+  border: 0;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 5px 10px;
+  margin: 0;
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 600;
+  color: #efefef;
+  
+  &.time {
+    color: #d4d4d7;
+    width: 70px;
+  }
+  &.temp {
+    padding: 10px 15px;
+    &::after {
+      content: '°';
+    }
+  }
+  &.icon {
+    font-size: 20px;
+    width: 60px;
+    text-align: right;
+  }
+}
+
+.test:first-child { display: none; }
+
+#temp-bar {
+  position: absolute;
+
+  .colorbar {
+    background-image: linear-gradient(blue, red);
+    display: block;
+
+    &:first-child {
+      border-radius: 5px 5px 0 0;
+    }
+    &.dawn {
+      background-image: linear-gradient(#723BD9, #3C1F73);
+    }
+    &.morning {
+      background-image: linear-gradient(#21CEF5, #00EBFD);
+    }
+    &.noon {
+      background-image: linear-gradient(#6A99FF, #00E5FF);
+    }
+    &.evening {
+      background-image: linear-gradient(#FDA385, #F6D366);
+    }
+    &.night {
+      background-image: linear-gradient(#CC94D1, #7A31E3);
+    }      
+  }
+}
+
+#hours-content {
+  position: relative;
+  margin-bottom: 40px;
+  
+  .container {
+    position: relative;
+    margin: 0 auto;
+  } 
+}

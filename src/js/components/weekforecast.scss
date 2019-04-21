@@ -1,0 +1,92 @@
+#week-forecast {
+    clear: both;
+    color: #d4d4d7;
+    font-size: 11px;
+    width: 277px;
+    margin: 0 auto;
+
+    .tempRange {
+        width: 140px;
+        display: block;
+        float: right;
+        margin-right: 30px;
+        position: relative;
+
+        .maxTemp, .minTemp {
+            display: block;
+            position: absolute;
+            width: 25px;
+            height: 24px;
+            line-height: 24px;
+            font-weight: 400;
+        }
+
+        .minTemp {
+            text-align: right;
+            margin-left: -35px;
+            left: 0px;
+        }
+
+        .maxTemp {
+            text-align: right;
+            right: -25px;
+        }
+
+        .bar {
+            display: block;
+            position: absolute;
+            top: 7px;
+            left: 0;
+            height: 11px;
+            background-color: #ccc;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+            width: 100%;
+
+            &.freeze {
+               background-image: linear-gradient(-90deg, #21CEF5, #00EBFD);
+            }
+            &.cold {
+                background-image: linear-gradient(-90deg, #6A99FF, #00E5FF);
+            }
+            &.warm {
+                background-image: linear-gradient(-90deg, #FDA385, #F6D366);
+            }
+            &.hot {
+                background-image: linear-gradient(-90deg, #7A31E3, #CC94D1);
+            }
+        }
+    }
+
+    .icon {
+        display: block;
+        float: left;
+        width: 40px;
+        height: 24px;
+        line-height: 24px;
+        font-size: 18px;
+        padding-left: 3px;
+    }
+
+    .day-name {
+        display: block;
+        float: left;
+        width: 30px;
+        font-weight: 600;
+        text-align: left;
+        line-height: 24px;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+    li {
+        margin: 0;
+        padding: 0;
+        height: 65px;
+        list-style-type: none;   
+        overflow: hidden;
+    }
+}

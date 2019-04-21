@@ -1,0 +1,31 @@
+#header {
+    color: #efefef;
+    height: 75px;
+    background-image: linear-gradient(#4b4d5e, #474859);
+    position: fixed;
+    width: 100%;
+    z-index: 998;
+}
+#city {
+    top: 32px;
+    left: 30px;
+    text-align: center;
+    position: absolute;
+    width: 200px;
+    font-size: 13px;
+    line-height: 20px;
+}
+.button {
+    top: 40px;
+    position: absolute;
+    font-size: 22px;
+    &.off {
+        opacity: 0.7;
+    }
+}
+#degree-c {
+    right: 65px;
+}
+#degree-f {
+    right: 35px;
+}
