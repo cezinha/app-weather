@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import { convertIcon } from '../util';
+import { DateTime } from 'luxon';
 
 import './hoursforecast.scss';
 
@@ -118,20 +119,35 @@ function getData(data) {
     hourly = data.hourly.data,
     offset = data.offset;
 
-  let now = new Date(),
+/*  let now = new Date(),
     userTime = now.getTime(),
-    userOffset = now.getTimezoneOffset() * 60000,
+    userOffset = now.getTimezoneOffset() / 60000,
     utc = userTime + userOffset,
-    city = utc + (3600000*offset),
-    cityTime = new Date(city);
+    city = utc + (3600000*userOffset/1000),
+    cityTime = new Date(city);*/
 
   let count = 0;
+  let dtfmt = new Date().toLocaleTimeString();
+
   for (let i = 0; i < hourly.length; i += 2) {
-    let dataTime = Number(hourly[i].time)*1000;
-    let hour = new Date(dataTime + (360000*offset));
+    let time = DateTime.fromMillis(Number(hourly[i].time)*1000).setZone(data.timezone);
+
+    if (dtfmt.match(/\d+ (am|pm)/gi)) {
+      time = time.toLocaleString({ hour: '2-digit', minute: '2-digit', hour12: true});
+      time = time.replace(/(\d+)\:\d+ (am|pm)/gi, "$1 $2");
+    } else {
+      time = time.toLocaleString({ hour: '2-digit', minute: '2-digit', hour12: false});
+      time = time.replace(/(\d+)\:\d+\:\d+/, "$1:00");
+    }
+
+
+    /*let dataTime = Number(hourly[i].time)*1000;
+    utc = dataTime + (userOffset * 1000);
+    let hour = new Date(utc + (360000*offset));
 
     let time = hour.toLocaleTimeString();
     time = (time.match(/\d+ (am|pm)/gi)) ? time.replace(/.*?(\d+)\:\d+\:\d+/, "$1") : time.replace(/.*?(\d+)\:\d+\:\d+/, "$1") + ":00"; 
+    */
     if (count < 13) {
       let o = {};
       o.temp = Math.ceil(Number(hourly[i].temperature));
