@@ -5,7 +5,7 @@ const path = require('path');
 module.exports = {
     entry: './src/js/app.js',
     output: {
-        path: path.resolve(__dirname, './dist/js'),
+        path: path.resolve(__dirname, './dist'),
         filename: 'app.js'
     },
     module: {
@@ -48,7 +48,7 @@ module.exports = {
                     loader: 'file-loader',
                     options: {
                         name: '[name].[ext]',
-                        outputPath: 'dist/font/'
+                        outputPath: '/font'
                     }
                 }]
             }

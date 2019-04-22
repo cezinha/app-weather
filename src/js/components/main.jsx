@@ -33,7 +33,7 @@ class MainPage extends React.Component {
         if ( this.state.lastLocation != this.state.location ) {
             console.log(this.state.location);
             if ( !this.state.isLoaded ) {
-                let API_URL = "http://localhost:3000/api" 
+                let API_URL = "https://server-app-weather.herokuapp.com/data/tokyo.json" 
                 fetch(API_URL + '?location=' + this.state.location)
                     .then(res => res.json())
                     .then(
