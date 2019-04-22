@@ -11,5 +11,9 @@ npm install
 ```
 node server.js
 ```
-
 Access http://localhost:5000/
+
+## Development
+```
+npm start
+```
