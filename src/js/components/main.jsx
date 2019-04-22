@@ -24,8 +24,11 @@ class MainPage extends React.Component {
     componentDidMount() {
         if (("props" in this.state) && (typeof this.state.props == "object")) {
             let params = new URLSearchParams(this.state.props.location.search);
-            
-            this.setState( { location: params.get('location') } );
+            if (params.get('location')) {
+                this.setState({ location: params.get('location') });
+            } else {
+                this.setState({ location: "-23.6821592,-46.8761748" });
+            }
         }
     }
 
@@ -33,8 +36,8 @@ class MainPage extends React.Component {
         if ( this.state.lastLocation != this.state.location ) {
             console.log(this.state.location);
             if ( !this.state.isLoaded ) {
-                let API_URL = "https://server-app-weather.herokuapp.com/data/tokyo.json" 
-                fetch(API_URL + '?location=' + this.state.location)
+                let API_URL = "https://server-app-weather.herokuapp.com/api/" 
+                fetch(API_URL + '?location=' + this.state.location + "&units=si")
                     .then(res => res.json())
                     .then(
                         (result) => {
@@ -83,13 +86,10 @@ class MainPage extends React.Component {
         } else {
             return (
                 <div id="main">
-                    <Header />
+                    <Header history={this.props.history} />
                     <DayForecast data={this.state.data} />
                     <HoursForecast data={this.state.data} />
                     <WeekForecast  data={this.state.data} />
-                    <div>
-                        {this.state.location}
-                    </div>
                 </div>
             );
         }

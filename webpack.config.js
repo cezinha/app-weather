@@ -5,7 +5,7 @@ const path = require('path');
 module.exports = {
     entry: './src/js/app.js',
     output: {
-        path: path.resolve(__dirname, './dist'),
+        path: path.resolve(__dirname, 'dist'),
         filename: 'app.js'
     },
     module: {
@@ -38,7 +38,7 @@ module.exports = {
                     loader: 'file-loader',  
                     options: {  
                         name: '[name].[ext]',  
-                        outputPath: 'images/'  
+                        outputPath: 'images/'
                     }  
                 }  
             },
@@ -48,7 +48,7 @@ module.exports = {
                     loader: 'file-loader',
                     options: {
                         name: '[name].[ext]',
-                        outputPath: '/font'
+                        outputPath: 'font/'
                     }
                 }]
             }
@@ -58,7 +58,7 @@ module.exports = {
     plugins: [
         new HtmlWebPackPlugin({
             title: "Weather App",
-            template: './src/index.html'
+            template: path.resolve(__dirname, 'src', 'index.html')
         })
     ]
 };

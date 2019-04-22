@@ -4,7 +4,7 @@ import { convertIcon } from '../util';
 import './weekforecast.scss';
 
 function DayForecast(props) {
-    var w = Math.round(Number(props.percent)/100 * 164);
+    var w = Math.round(Number(props.percent)/100 * 140);
     var styleObj = { width: w + "px" };
     var classTemp = "bar ";
     if (Number(props.percent) > 75) {

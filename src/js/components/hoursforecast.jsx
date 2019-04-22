@@ -125,18 +125,21 @@ function getData(data) {
 
   res.push( { temp: Math.round(Number(data.currently.temperature)), time: "Now", icon: "wi " + convertIcon(data.currently.icon) } );
   
+  let count = 0;
   for (let i = 0; i < hourly.length; i += 2) {
-    
     let dataTime = Number(hourly[i].time)*1000;
     let hour = new Date(dataTime + (360000*offset));
 
-    if (hour.getDate() == cityTime.getDate()) {
+    if (count < 10) {
       let o = {};  
       o.temp = Math.round(Number(hourly[i].temperature));
       o.time = hour.toLocaleTimeString().replace(/.*?(\d+)\:\d+\:\d+/, "$1") + ":00";
       o.icon = 'wi ' + convertIcon(hourly[i].icon);
 
       res.push(o);
+      count ++;
+    } else {
+      break;
     }
   }
 
