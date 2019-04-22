@@ -29,16 +29,16 @@ class DegreeButtons extends Component {
         if (this.state.units == "si") {
             return (
                 <div id="degree-buttons">
-                    <button className="degree disabled" id="degree-c"><i className="wi wi-celsius"></i></button>
-                    <button className="degree off" id="degree-f" onClick={handleClick}><i className="wi wi-fahrenheit"></i></button>
+                    <a href="/" className="degree disabled" id="degree-c"><i className="wi wi-celsius"></i></a>
+                    <a href="/" className="degree off" id="degree-f" onClick={handleClick}><i className="wi wi-fahrenheit"></i></a>
                 </div>
             );
         }
 
         return (
             <div id="degree-buttons">
-                <button className="degree off" id="degree-c" onClick={handleClick}><i className="wi wi-celsius"></i></button>
-                <button className="degree disabled" id="degree-f"><i className="wi wi-fahrenheit"></i></button>
+                <a href="/" className="degree off" id="degree-c" onClick={handleClick}><i className="wi wi-celsius"></i></a>
+                <a href="/" className="degree disabled" id="degree-f"><i className="wi wi-fahrenheit"></i></a>
             </div>
         );
     }

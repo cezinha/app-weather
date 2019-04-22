@@ -1,4 +1,6 @@
-button {
+a.degree {
+    display: block;
+    text-align: center;
     top: 40px;
     position: absolute;
     font-size: 22px;
@@ -6,6 +8,8 @@ button {
     color: #efefef;
     border: none;
     overflow: hidden;
+    width: 28px;
+    height: 32px;
 
     &.off {
         opacity: 0.6;
