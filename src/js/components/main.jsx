@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import HoursForecast from './hoursforecast.jsx';
 import DayForecast from './dayforecast.jsx';
 import WeekForecast from './weekforecast.jsx';
@@ -7,7 +7,7 @@ import '../../css/app.scss';
 import '../../css/weather-icons.scss';
 import '../../css/weather-icons-wind.scss';
 
-class MainPage extends React.Component {
+class MainPage extends Component {
     constructor(props) {
         super(props);
 
@@ -15,6 +15,8 @@ class MainPage extends React.Component {
             props: props,
             location: '',
             lastLocation: '',
+            units: '',
+            lastUnits: '',
             error: null,
             isLoaded: false,
             data: {}
@@ -29,25 +31,30 @@ class MainPage extends React.Component {
             } else {
                 this.setState({ location: "-23.6821592,-46.8761748" });
             }
+
+            if (params.get('units')) {
+                this.setState({ units: params.get('units') });
+            } else {
+                this.setState({ units: "si" });
+            }
         }
     }
 
     componentDidUpdate() {
-        if ( this.state.lastLocation != this.state.location ) {
-            console.log(this.state.location);
+        if  ( ( this.state.lastLocation != this.state.location ) || ( this.state.lastUnits != this.state.units ) ) {
             if ( !this.state.isLoaded ) {
                 let API_URL = "https://server-app-weather.herokuapp.com/api/"
                 //let API_URL = "https://server-app-weather.herokuapp.com/data/sao-paulo.json"
-                fetch(API_URL + '?location=' + this.state.location + "&units=si")
+                fetch(API_URL + '?location=' + this.state.location + "&units=" + this.state.units)
                     .then(res => res.json())
                     .then(
                         (result) => {
                             this.setState({
                                 isLoaded: true,
                                 lastLocation: this.state.location,
+                                lastUnits: this.state.units,
                                 data: result
                             });
-                            console.log(result);
                         }
                     ).catch((error) => {
                         this.setState({
@@ -55,12 +62,6 @@ class MainPage extends React.Component {
                             error: error
                         })
                     });
-            } else {
-                console.log('load again');
-                /* this.setState({
-                    isLoaded: false,
-                    error: null
-                })*/
             }
         }
     }
@@ -87,7 +88,7 @@ class MainPage extends React.Component {
         } else {
             return (
                 <div id="main">
-                    <Header history={this.props.history} />
+                    <Header history={this.props.history} units={this.state.units} />
                     <DayForecast data={this.state.data} />
                     <HoursForecast data={this.state.data} />
                     <WeekForecast  data={this.state.data} />

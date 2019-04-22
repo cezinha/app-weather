@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { convertIcon } from '../util';
+import { DateTime } from 'luxon';
 
 import './weekforecast.scss';
 
@@ -51,22 +52,22 @@ function getData(data) {
         daily = data.daily.data,
         offset = data.offset;
 
-    let now = new Date(),
+    /*let now = new Date(),
         userTime = now.getTime(),
         userOffset = now.getTimezoneOffset() * 60000,
         utc = userTime + userOffset,
         city = utc + (3600000*offset),
-        cityTime = new Date(city);
+        cityTime = new Date(city);*/
 
     const WEEKDAY = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
     for (let i = 0; i < daily.length; i ++) {
-        let dataTime = Number(daily[i].time)*1000;
-        let hour = new Date(dataTime + (360000*offset));
+        let today = DateTime.local().setZone(data.timezone);
+        let cityDate = DateTime.fromMillis(Number(daily[i].time)*1000).setZone(data.timezone);
 
-        if (hour.getDate() > cityTime.getDate()) {
+        if (today < cityDate) {
             let o = {};
-            o.day = WEEKDAY[hour.getDay()];
+            o.day = cityDate.weekdayShort;
             o.minTemp = Math.ceil(Number(daily[i].temperatureMin));
             o.maxTemp = Math.ceil(Number(daily[i].temperatureMax));
             o.icon = 'wi ' + convertIcon(daily[i].icon);

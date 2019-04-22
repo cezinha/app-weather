@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Select from 'react-select';
 import { citiesOptions } from '../data/cities';
 import chroma from 'chroma-js';
+import DegreeButtons from './degreebuttons.jsx';
 
 import './header.scss';
 
@@ -25,12 +26,12 @@ const colourStyles = {
         cursor: isDisabled ? 'not-allowed' : 'default'
       };
     },
-    singleValue: styles => ({ 
-      ...styles, 
+    singleValue: styles => ({
+      ...styles,
       color: "#fff"
     }),
-    indicatorSeparator: styles => ({ 
-      ...styles, 
+    indicatorSeparator: styles => ({
+      ...styles,
       backgroundColor: "none",
       minHeight: "18px",
       margin: 0,
@@ -47,7 +48,7 @@ class Header extends Component {
     super(props);
 
     this.state = {
-      selectedOption : citiesOptions[7]
+      selectedOption : citiesOptions[7],
     };
   }
 
@@ -61,24 +62,25 @@ class Header extends Component {
           break;
         }
       }
-    } 
+    };
 
     let onSelectCity = (item) => {
-      var params = new URLSearchParams(location.search);
-      //if (params.get("location") != item.value) {
-        for (let i = 0; i < citiesOptions.length; i++) {
-          if (citiesOptions[i].value == params.get("location")) {
-            this.setState({ selectedOption: citiesOptions[i] });
-            break;
-          }
+      let params = new URLSearchParams(location.search);
+      for (let i = 0; i < citiesOptions.length; i++) {
+        if (citiesOptions[i].value == params.get("location")) {
+          this.setState({ selectedOption: citiesOptions[i] });
+          break;
         }
-      
+      }
+
       if (params.get("location") != item.value) {
-        location.search = 'location='+item.value;
-        /*this.props.history.push({
-          pathname: '/',
-          search: '?location=' + item.value
-        })*/
+        if (params.has("location")) {
+          params.set("location", item.value);
+        } else {
+          params.append("location", item.value);
+        }
+
+        location.search = (params.toString());
       }
     }
 
@@ -94,12 +96,11 @@ class Header extends Component {
               onChange={onSelectCity}
             />
           </div>
-          <div className="button degree" id="degree-c"><i className="wi wi-celsius"></i></div>
-          <div className="button degree off" id="degree-f"><i className="wi wi-fahrenheit"></i></div>
+          <DegreeButtons units={this.props.units} />
         </div>
       </div>
     );
-  }    
+  } 
 }
 
 export default Header;

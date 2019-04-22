@@ -46,11 +46,11 @@ class DayForecast extends Component {
                     <div id="min-max" className="detail">
                         <div id="max">
                             {data.tempMax}°
-                            <span class="arrow-up"></span>
+                            <span className="arrow-up"></span>
                         </div>
                         <div id="min">
                             {data.tempMin}°
-                            <span class="arrow-down"></span>
+                            <span className="arrow-down"></span>
                         </div>
                     </div>
                     <h1 id="current">

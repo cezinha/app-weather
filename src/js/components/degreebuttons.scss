@@ -1,0 +1,19 @@
+button {
+    top: 40px;
+    position: absolute;
+    font-size: 22px;
+    background-color: transparent;
+    color: #efefef;
+    border: none;
+    overflow: hidden;
+
+    &.off {
+        opacity: 0.6;
+    }
+}
+#degree-c {
+    right: 65px;
+}
+#degree-f {
+    right: 35px;
+}

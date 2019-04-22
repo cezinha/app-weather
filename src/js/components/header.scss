@@ -1,6 +1,6 @@
 #header {
     color: #efefef;
-    height: 75px;
+    height: 73px;
     background-image: linear-gradient(#4b4d5e, #474859);
     position: fixed;
     width: 100%;
@@ -14,18 +14,4 @@
     width: 200px;
     font-size: 13px;
     line-height: 20px;
-}
-.button {
-    top: 40px;
-    position: absolute;
-    font-size: 22px;
-    &.off {
-        opacity: 0.7;
-    }
-}
-#degree-c {
-    right: 65px;
-}
-#degree-f {
-    right: 35px;
 }

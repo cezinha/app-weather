@@ -116,15 +116,7 @@ var forecast = [
 
 function getData(data) {
   let res = [],
-    hourly = data.hourly.data,
-    offset = data.offset;
-
-/*  let now = new Date(),
-    userTime = now.getTime(),
-    userOffset = now.getTimezoneOffset() / 60000,
-    utc = userTime + userOffset,
-    city = utc + (3600000*userOffset/1000),
-    cityTime = new Date(city);*/
+    hourly = data.hourly.data;
 
   let count = 0;
   let dtfmt = new Date().toLocaleTimeString();
@@ -140,14 +132,6 @@ function getData(data) {
       time = time.replace(/(\d+)\:\d+\:\d+/, "$1:00");
     }
 
-
-    /*let dataTime = Number(hourly[i].time)*1000;
-    utc = dataTime + (userOffset * 1000);
-    let hour = new Date(utc + (360000*offset));
-
-    let time = hour.toLocaleTimeString();
-    time = (time.match(/\d+ (am|pm)/gi)) ? time.replace(/.*?(\d+)\:\d+\:\d+/, "$1") : time.replace(/.*?(\d+)\:\d+\:\d+/, "$1") + ":00"; 
-    */
     if (count < 13) {
       let o = {};
       o.temp = Math.ceil(Number(hourly[i].temperature));

@@ -4,6 +4,7 @@
     font-size: 11px;
     width: 277px;
     margin: 0 auto;
+    padding: 20px 0 40px;
 
     .tempRange {
         width: 140px;
@@ -45,16 +46,16 @@
             width: 100%;
 
             &.freeze {
-               background-image: linear-gradient(-90deg, #21CEF5, #00EBFD);
+                background-image: linear-gradient(-90deg, #21CEF5, #00EBFD);
             }
             &.cold {
                 background-image: linear-gradient(-90deg, #6A99FF, #00E5FF);
             }
             &.warm {
-                background-image: linear-gradient(-90deg, #FDA385, #F6D366);
+                background-image: linear-gradient(-90deg, #7A31E3, #CC94D1);
             }
             &.hot {
-                background-image: linear-gradient(-90deg, #7A31E3, #CC94D1);
+                background-image: linear-gradient(-90deg, #FDA385, #F6D366);
             }
         }
     }
@@ -76,6 +77,7 @@
         font-weight: 600;
         text-align: left;
         line-height: 24px;
+        text-transform: uppercase;
     }
 
     ul {
@@ -85,8 +87,8 @@
     li {
         margin: 0;
         padding: 0;
-        height: 65px;
-        list-style-type: none;   
+        height: 75px;
+        list-style-type: none;
         overflow: hidden;
     }
 }
