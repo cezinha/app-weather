@@ -9,7 +9,7 @@ npm install
 
 ## Run
 ```
-npm start
+node server.js
 ```
 
-Access http://localhost:8080/
+Access http://localhost:5000/
