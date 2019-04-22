@@ -38,7 +38,9 @@ function drawGraph() {
     hour = (tds.eq(i).text() == "Now") ? tds.eq(1).text() : tds.eq(i).text();
     if (hour.match(/\d+:\d+/)) {
       hour = Number(hour.replace(/(\d+):\d+/, '$1'));
-    } 
+    } else {
+      hour = (hour.toUpperCase() == "12 AM") ? 0 : (hour.toUpperCase() == "12 PM") ? 12 : (hour.toUpperCase().indexOf('AM') > -1) ? Number(hour.replace(/(\d+) (am|pm)/gi, '$1')) : Number(hour.replace(/(\d+) (am|pm)/gi, '$1')) + 12;
+    }
     if (hour < 7) {
       type = 'dawn';
     } else if (hour < 12) {
@@ -123,17 +125,17 @@ function getData(data) {
     city = utc + (3600000*offset),
     cityTime = new Date(city);
 
-  res.push( { temp: Math.round(Number(data.currently.temperature)), time: "Now", icon: "wi " + convertIcon(data.currently.icon) } );
-  
   let count = 0;
   for (let i = 0; i < hourly.length; i += 2) {
     let dataTime = Number(hourly[i].time)*1000;
     let hour = new Date(dataTime + (360000*offset));
 
-    if (count < 10) {
-      let o = {};  
-      o.temp = Math.round(Number(hourly[i].temperature));
-      o.time = hour.toLocaleTimeString().replace(/.*?(\d+)\:\d+\:\d+/, "$1") + ":00";
+    let time = hour.toLocaleTimeString();
+    time = (time.match(/\d+ (am|pm)/gi)) ? time.replace(/.*?(\d+)\:\d+\:\d+/, "$1") : time.replace(/.*?(\d+)\:\d+\:\d+/, "$1") + ":00"; 
+    if (count < 13) {
+      let o = {};
+      o.temp = Math.ceil(Number(hourly[i].temperature));
+      o.time = time;
       o.icon = 'wi ' + convertIcon(hourly[i].icon);
 
       res.push(o);
@@ -142,11 +144,12 @@ function getData(data) {
       break;
     }
   }
+  res[0].time = "Now";
 
   return res;
 }
 
-class HoursForecast extends Component {  
+class HoursForecast extends Component {
     render() {
       if (this.props.data) {
         let data = getData(this.props.data);

@@ -5,12 +5,12 @@ import { convertIcon } from '../util';
 function getData(data) {
     var o = {};
 
-    o.tempMax = Math.round(Number(data.daily.data[0].temperatureMax));
-    o.tempMin = Math.round(Number(data.daily.data[0].temperatureMin));
-    o.currTemp = Math.round(Number(data.currently.temperature));
-    o.dewPoint = Math.round(Number(data.currently.dewPoint));
-    o.windSpeed = Math.round(Number(data.currently.windSpeed));
-    o.humidity = Math.round(Number(data.currently.humidity) * 100);
+    o.tempMax = Math.ceil(Number(data.daily.data[0].temperatureMax));
+    o.tempMin = Math.ceil(Number(data.daily.data[0].temperatureMin));
+    o.currTemp = Math.ceil(Number(data.currently.temperature));
+    o.dewPoint = Math.ceil(Number(data.currently.dewPoint));
+    o.windSpeed = Math.ceil(Number(data.currently.windSpeed));
+    o.humidity = Math.ceil(Number(data.currently.humidity) * 100);
     o.summary = data.daily.data[0].summary;
     o.iconClass =  'wi ' + convertIcon(data.currently.icon);
     o.windSpeedUnit = ' m/s';
@@ -65,7 +65,7 @@ class DayForecast extends Component {
                                 <i className="wi wi-strong-wind"></i>
                             </span>
                             {data.windSpeed}
-                            <span className="unit"> 
+                            <span className="unit">
                                 {data.windSpeedUnit}
                             </span>
                         </li>
@@ -89,10 +89,10 @@ class DayForecast extends Component {
                             {data.summary}
                         </h2>
                     </div>
-                </div>             
+                </div>
             </div>
         );
-    }    
+    }
 }
 
 export default DayForecast;

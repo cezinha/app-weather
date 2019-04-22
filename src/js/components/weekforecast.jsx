@@ -4,7 +4,7 @@ import { convertIcon } from '../util';
 import './weekforecast.scss';
 
 function DayForecast(props) {
-    var w = Math.round(Number(props.percent)/100 * 140);
+    var w = Math.ceil(Number(props.percent)/100 * 140);
     var styleObj = { width: w + "px" };
     var classTemp = "bar ";
     if (Number(props.percent) > 75) {
@@ -50,29 +50,29 @@ function getData(data) {
     let res = [],
         daily = data.daily.data,
         offset = data.offset;
-  
+
     let now = new Date(),
         userTime = now.getTime(),
         userOffset = now.getTimezoneOffset() * 60000,
         utc = userTime + userOffset,
         city = utc + (3600000*offset),
         cityTime = new Date(city);
-           
+
     const WEEKDAY = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
-    for (let i = 0; i < daily.length; i ++) {  
+    for (let i = 0; i < daily.length; i ++) {
         let dataTime = Number(daily[i].time)*1000;
         let hour = new Date(dataTime + (360000*offset));
-    
+
         if (hour.getDate() > cityTime.getDate()) {
-            let o = {};  
+            let o = {};
             o.day = WEEKDAY[hour.getDay()];
-            o.minTemp = Math.round(Number(daily[i].temperatureMin));
-            o.maxTemp = Math.round(Number(daily[i].temperatureMax));
+            o.minTemp = Math.ceil(Number(daily[i].temperatureMin));
+            o.maxTemp = Math.ceil(Number(daily[i].temperatureMax));
             o.icon = 'wi ' + convertIcon(daily[i].icon);
 
             res.push(o);
-        }        
+        }
     }
 
     return res;
@@ -80,7 +80,6 @@ function getData(data) {
 
 class WeekForecast extends Component {
     render() {
-        
         if (this.props.data) {
             let data = getData(this.props.data);
             let weekMaxTemp = Math.max.apply(Math, data.map(function(o) { return o.maxTemp; }));
@@ -88,18 +87,18 @@ class WeekForecast extends Component {
 
             let updatedList = data.map((forecast, i) => {
                 let key = 'k'+i;
-                let percent = Math.round((forecast.maxTemp - forecast.minTemp) / (weekMaxTemp - weekMinTemp) * 100); 
-                
+                let percent = Math.ceil((forecast.maxTemp - forecast.minTemp) / (weekMaxTemp - weekMinTemp) * 100); 
+
                 return <DayForecast key={key} day={forecast.day} minTemp={forecast.minTemp} maxTemp={forecast.maxTemp} percent={percent} icon={forecast.icon} />
-            });  
-            
+            });
+
             return (
                 <div id="week-forecast">
                     <ul>
                         {updatedList}
                     </ul>
                 </div>
-            );    
+            );
         }
 
         return (
@@ -107,7 +106,7 @@ class WeekForecast extends Component {
                 Loading
             </div>
         );
-    }    
+    }
 }
 
 export default WeekForecast;

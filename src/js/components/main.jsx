@@ -11,8 +11,8 @@ class MainPage extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { 
-            props: props, 
+        this.state = {
+            props: props,
             location: '',
             lastLocation: '',
             error: null,
@@ -32,11 +32,12 @@ class MainPage extends React.Component {
         }
     }
 
-    componentDidUpdate() {        
+    componentDidUpdate() {
         if ( this.state.lastLocation != this.state.location ) {
             console.log(this.state.location);
             if ( !this.state.isLoaded ) {
-                let API_URL = "https://server-app-weather.herokuapp.com/api/" 
+                let API_URL = "https://server-app-weather.herokuapp.com/api/"
+                //let API_URL = "https://server-app-weather.herokuapp.com/data/sao-paulo.json"
                 fetch(API_URL + '?location=' + this.state.location + "&units=si")
                     .then(res => res.json())
                     .then(
@@ -56,14 +57,14 @@ class MainPage extends React.Component {
                     });
             } else {
                 console.log('load again');
-               /* this.setState({
+                /* this.setState({
                     isLoaded: false,
                     error: null
                 })*/
             }
         }
     }
-    
+
     render() {
         const { error, isLoaded } = this.state;
 
