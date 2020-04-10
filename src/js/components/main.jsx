@@ -43,8 +43,8 @@ class MainPage extends Component {
     componentDidUpdate() {
         if  ( ( this.state.lastLocation != this.state.location ) || ( this.state.lastUnits != this.state.units ) ) {
             if ( !this.state.isLoaded ) {
-                let API_URL = "https://server-app-weather.herokuapp.com/api/"
-                //let API_URL = "https://server-app-weather.herokuapp.com/data/sao-paulo.json"
+                let API_URL = "https://server-app-weather20.herokuapp.com/api/"
+                //let API_URL = "https://server-app-weather20.herokuapp.com/data/sao-paulo.json"
                 fetch(API_URL + '?location=' + this.state.location + "&units=" + this.state.units)
                     .then(res => res.json())
                     .then(
