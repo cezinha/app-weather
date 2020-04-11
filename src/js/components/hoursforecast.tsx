@@ -30,8 +30,8 @@ function drawGraph() {
   tdW += pxToNumber(td.css('padding-right'));
   tdW += td.width();
 
-  var sizes = [];
-  var times = [];
+  var sizes: {size: number, css: string}[] = [];
+  var times: string[] = [];
   var hour = tds.eq(1).text();
   var type = 'noon';
   
@@ -81,11 +81,16 @@ function drawGraph() {
   bar.find('.colorbar').width(tdW);
 }
 
-function pxToNumber(val) {
+function pxToNumber(val:string) {
   return Number(val.replace('px', ''));
 }
 
-function HourForecast(props) {
+interface IHourProps {
+  time: string,
+  temp: string,
+  icon: string
+}
+function HourForecast(props:IHourProps) {
   return (
     <tr>
       <td className="time">
@@ -114,7 +119,7 @@ var forecast = [
 ];
 */
 
-function getData(data) {
+function getData(data: {hourly: any}) {
   let res = [],
     hourly = data.hourly.data;
 
