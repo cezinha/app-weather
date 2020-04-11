@@ -1,24 +1,26 @@
-import React, { Component } from 'react';
-import Select from 'react-select';
+import * as React from 'react';
+import Select, { ClassNamesState } from 'react-select';
+import * as CSS from 'csstype';
 import { citiesOptions } from '../data/cities';
-import chroma from 'chroma-js';
-import DegreeButtons from './degreebuttons.jsx';
+//import * as chroma from 'chroma-js';
+import DegreeButtons from './degreebuttons';
 
 import './header.scss';
+import { RouteComponentProps } from 'react-router-dom';
 
 const colourStyles = {
-    placeholder: styles => ({
+    placeholder: (styles: CSS.Properties) => ({
       ...styles,
       color: '#84889A'
     }),
-    control: styles => ({ 
-      ...styles, 
-      backgroundColor: 'none', 
+    control: (styles: CSS.Properties) => ({
+      ...styles,
+      backgroundColor: 'none',
       borderColor: "transparent",
       minHeight: "18px"
     }),
-    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-      const color = chroma('#00ff00');
+    option: (styles: CSS.Properties, { isDisabled, isFocused, isSelected }:ClassNamesState) => {
+      //const color = chroma('#00ff00');
       return {
         ...styles,
         backgroundColor: isDisabled ? null : isSelected ? '#747691' : isFocused ? '#6A99FF' : '#ffffff',
@@ -26,25 +28,33 @@ const colourStyles = {
         cursor: isDisabled ? 'not-allowed' : 'default'
       };
     },
-    singleValue: styles => ({
+    singleValue: (styles: CSS.Properties) => ({
       ...styles,
       color: "#fff"
     }),
-    indicatorSeparator: styles => ({
+    indicatorSeparator: (styles: CSS.Properties) => ({
       ...styles,
       backgroundColor: "none",
       minHeight: "18px",
       margin: 0,
       padding: 0
     }),
-    indicatorContainer: styles => ({
+    indicatorContainer: (styles: CSS.Properties) => ({
       ...styles,
       padding: 0
     })
 };
 
-class Header extends Component {
-  constructor(props) {
+interface IState {
+  selectedOption: {value: string, label: string}
+}
+
+interface IProps extends RouteComponentProps<any> {
+  units: string
+}
+
+class Header extends React.Component<IProps, IState> {
+  constructor(props: IProps) {
     super(props);
 
     this.state = {
@@ -64,7 +74,7 @@ class Header extends Component {
       }
     };
 
-    let onSelectCity = (item) => {
+    let onSelectCity = (item: {value: string}) => {
       let params = new URLSearchParams(location.search);
       for (let i = 0; i < citiesOptions.length; i++) {
         if (citiesOptions[i].value == params.get("location")) {

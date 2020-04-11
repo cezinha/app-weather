@@ -1,14 +1,28 @@
-import React, { Component } from 'react';
-import HoursForecast from './hoursforecast.jsx';
-import DayForecast from './dayforecast.jsx';
-import WeekForecast from './weekforecast.jsx';
-import Header from './header.jsx';
+import * as React from 'react';
+import HoursForecast from './hoursforecast';
+import DayForecast from './dayforecast';
+import WeekForecast from './weekforecast';
+import Header from './header';
 import '../../css/app.scss';
 import '../../css/weather-icons.scss';
 import '../../css/weather-icons-wind.scss';
+import { RouteComponentProps } from 'react-router-dom';
 
-class MainPage extends Component {
-    constructor(props) {
+interface IState {
+    props: IProps,
+    error: any,
+    isLoaded: boolean,
+    location: string,
+    lastLocation: string,
+    units: string,
+    lastUnits: string,
+    data: object
+}
+
+interface IProps extends RouteComponentProps<any> {}
+
+class MainPage extends React.Component<IProps, IState> {
+    constructor(props: IProps) {
         super(props);
 
         this.state = {
@@ -88,7 +102,7 @@ class MainPage extends Component {
         } else {
             return (
                 <div id="main">
-                    <Header history={this.props.history} units={this.state.units} />
+                    <Header units={this.state.units} {...this.props} />
                     <DayForecast data={this.state.data} />
                     <HoursForecast data={this.state.data} />
                     <WeekForecast  data={this.state.data} />

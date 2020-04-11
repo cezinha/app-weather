@@ -80,6 +80,8 @@ function getData(data) {
 }
 
 class WeekForecast extends Component {
+	public props: any;
+
     render() {
         if (this.props.data) {
             let data = getData(this.props.data);

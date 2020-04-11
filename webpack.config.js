@@ -1,25 +1,38 @@
-
-const HtmlWebPackPlugin = require("html-webpack-plugin");
 const path = require('path');
-
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
-    entry: './src/js/app.js',
+    // webpack will take the files from ./src/
+    entry: './src/js/app.tsx',
+
+    // and output it into /dist as bundle.js
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'app.js'
+        path: path.join(__dirname, '/dist'),
+        filename: 'bundle.js'
     },
+
+    // adding .ts and .tsx to resolve.extensions will help babel look for .ts and .tsx files to transpile
+    resolve: {
+        extensions: ['.ts', '.tsx', '.js']
+    },
+
     module: {
         rules: [
+
+            // we use babel-loader to load our jsx and tsx files
             {
-                test: /\.(js|jsx)$/,
+                test: /\.(ts|js)x?$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: "babel-loader",
-                    options: {  
-                        cacheDirectory: true  
-                    }                    
+                    loader: 'babel-loader'
                 },
             },
+            /*
+            // css-loader to bundle all the css files into one file and style-loader to add all the styles  inside the style tag of the document
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            },*/
+
             {
                 test: /\.html$/,
                 use: [
@@ -28,19 +41,19 @@ module.exports = {
                     }
                 ]
             },
-            {  
-                test: /\.(css|scss)$/,  
-                use: ['style-loader', 'css-loader', 'sass-loader']  
+            {
+                test: /\.(css|scss)$/,
+                use: ['style-loader', 'css-loader', 'sass-loader']
             },
-            {  
-                test: /\.(png|jpg)$/,  
-                use: {  
-                    loader: 'file-loader',  
-                    options: {  
-                        name: '[name].[ext]',  
+            {
+                test: /\.(png|jpg)$/,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
                         outputPath: 'images/'
-                    }  
-                }  
+                    }
+                }
             },
             {
                 test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
@@ -54,9 +67,9 @@ module.exports = {
             }
         ]
     },
-    watch: true,
     plugins: [
-        new HtmlWebPackPlugin({
+        new HtmlWebpackPlugin({
+            //template: './src/index.html'
             title: "Weather App",
             template: path.resolve(__dirname, 'src', 'index.html')
         })

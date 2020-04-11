@@ -23,6 +23,8 @@ function getData(data) {
 }
 
 class DayForecast extends Component {
+	public props: any;
+
     render() {
         let data = {
             tempMax: '',

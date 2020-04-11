@@ -1,9 +1,15 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import './degreebuttons.scss';
 
-class DegreeButtons extends Component {
+interface IState {
+    units: string
+}
+interface IProps {
+    units: string
+}
 
-    constructor(props) {
+class DegreeButtons extends React.Component<IProps, IState> {
+    constructor(props: IProps) {
         super(props);
 
         this.state = {
@@ -12,7 +18,7 @@ class DegreeButtons extends Component {
     }
 
     render() {
-        let handleClick = (e) => {
+        let handleClick = (e: React.MouseEvent) => {
             e.preventDefault();
 
             let params = new URLSearchParams(location.search);

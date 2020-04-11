@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import $ from 'jquery';
 import { convertIcon } from '../util';
 import { DateTime } from 'luxon';
@@ -149,7 +149,9 @@ function getData(data) {
   return res;
 }
 
-class HoursForecast extends Component {
+class HoursForecast extends React.Component {
+	public props: any;
+
     render() {
       if (this.props.data) {
         let data = getData(this.props.data);
